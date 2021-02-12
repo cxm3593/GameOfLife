@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Project 3 | Index</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	</head>
+	<body>
+		<div class="wrapper">
+			
+			<div class="header">
+				<h1>Conway's Game of Life</h1>
+				<h3><em>In memory of John Horton Conway</em></h3>
+			</div>
+
+			<div class="navigation">
+				<img src="assets/images/project3logo.png" alt="logo">
+				<a href="index.html">Index</a>
+				<a href="gallery.html">Gallery</a>
+				<a href="gameOfLife.html">Game</a>
+				<a href="implement.html">Implementation</a>
+				<a href="resources.html">RESOURCES</a>
+			</div>
+	
+			<div class="content">
+				<div class="content_section">
+					<h2>Overview of Game of Life</h2>
+					<p>
+						Conway's Game of Life is a well known zero player game. Which means that the process of this game do not have
+						any user input involved. The program automatically generates output from the initial state. The game was first
+						invented in 1970s by a British mathematican, John Conway. Conway developed this great simulation which could 
+						generate complex outputs with given simple game rules.
+					</p>
+	
+					<div class="image">
+						<img src="assets/images/gof.gif" alt="an example of Game of Life">
+					</div>
+	
+					<p>
+						The components of this game are simple. It runs on a 2d grid which contains a certain amount of positions that can
+						hold a cell. A cell can be in a state of either "dead" or "alive": a dead cell will appear as a blank space while any
+						alive cell will appear as a occupied space (visible).
+					</p>
+	
+					<p>
+						Rules of this game are simple as well:</p>
+						<ul>
+							<li>If any dead cell has exactly three living neighbors, it will be alive in next generation.</li>
+							<li>If any alive cell has less than two living neighbors, it will die in next generation because of underpopulation</li>
+							<li>If any alive cell has more than three living neighbors, it will die in next generation because of overpopulation</li>
+							<li>If any alive cell has two or three living neighbors, it will continue to live in next generation.</li>
+						</ul>
+					
+	
+					<p>
+						For a more intuitionistic introduction, reference this video's demonstration.</p>
+						
+						<p><embed width="500" height="400" src="https://youtube.com/v/ouipbDkwHWA"></p>
+					
+	
+					<p>More than Just a simulation, people have discovered that, with such simple rules. Game of Life could generate various complicated patterns, check out gallary for more information.</p>
+				</div>
+			</div>
+		</div>
+		
+
+		<p></p>
+	</body>
+
+</html>

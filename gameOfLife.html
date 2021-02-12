@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Project 3 | Game of life demonstration</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		
+	</head>
+	<body>
+
+		<div class="wrapper">
+			<div class="header">
+				<h1>Conway's Game of Life</h1>
+				<h2>The Web Game Sample</h2>
+				
+			</div>
+
+			<div class="navigation">
+				<img src="assets/images/project3logo.png" alt="logo">
+				<a href="index.html">Index</a>
+				<a href="gallery.html">Gallery</a>
+				<a href="gameOfLife.html">Game</a>
+				<a href="implement.html">Implementation</a>
+				<a href="resources.html">RESOURCES</a>
+			</div>
+
+			<div class="content">
+				<div class="content_section">
+					<p>This is a simple web based game of life written in Javascript. It starts with random living cells on a grid.
+						The grid size is 400 by 400. And the random generation only starts on the central 200 by 200 square.
+					</p>
+
+					<p>
+						Some Pattern lives longer and some lives shorter. Since the patterns are randomly generated, 
+						most of the time, it will not stay in motion for a long time. 
+						You may try to refresh this page to get the grid updated.
+					</p>
+
+					<p>
+						If you are interested how it is implemented, navigate to the <a href="implement.html">Implementation</a> page for more information.
+					</p>
+					
+				</div>
+
+				<div class="content_section">
+				<canvas id="gameCanvas" width="400" height="400"></canvas>
+				</div>
+		
+			</div>
+		</div>
+
+		<script src="gameOfLife.js"></script>
+
+		
+	</body>
+</html>

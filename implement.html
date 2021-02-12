@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Project 3 | Implementation</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="header">
+				<h1>Conway's Game of Life</h1>
+				<h2>How To Implement</h2>
+			</div>
+
+			<div class="navigation">
+				<img src="assets/images/project3logo.png" alt="logo">
+				<a href="index.html">Index</a>
+				<a href="gallery.html">Gallery</a>
+				<a href="gameOfLife.html">Game</a>
+				<a href="implement.html">Implementation</a>
+				<a href="resources.html">RESOURCES</a>
+			</div>
+			<div class="content">
+				<div class="content_section">
+					<p>
+						In this page, I will present how to implement the random generated game of life displayed on the game page. 
+						The game is based on Javascript to be presented on a website.
+					</p>
+					<p>
+						This section followed the guide of <a href="http://disruptive-communications.com/conwaylifejavascript/">LC's How I built Conway’s Game of Life in JavaScript</a>
+					</p>
+				</div>
+
+				<div class="content_section">
+					<h3>Array and Grid</h3>
+					<p>
+						The game is based on a 2d array working as the grid storing positions. 
+						There multiple ways to implement a 2d array in JavaScript. 
+						Though it is not as easy as making a 2d array in other programming languages. 
+						The Implementation is not difficult. 
+						To implement 2d array, first build an array and iterate through it. 
+						For every array cells, populate it with a new empty array.
+					</p>
+					<pre>
+var grid = Array(size);
+for (var i=0; i&lt;size; i++){
+	grid[i] = new Array(size);
+}
+					</pre>
+					<p>
+						For this game, wrap it up with a function makeGrid(size) with it.
+					</p>
+				</div>
+
+				<div class="content_section">
+					<h3>Populate and Update Grid</h3>
+					<p>
+						To populate the grid, there multiples ways to do so. Here I simply iterate through this 2d array. 
+						And for each position, call Math.rand() to get a random number. 
+						That number will be between 0 and 1. 
+						But that will cause too many cells are spawn in the first generation. So, I introduced a rate variable to control it.
+						The random number will be multiplied by the rate. Then round the result with Math.round(). 
+						If the result is the rate, then put a live cell in this position. (set this indexed position into 1)
+					</p>
+					<pre>
+						
+function populateGrid(grid){ // populate the grid randomly.
+	var rate = 7
+	for(var i=100; i&lt;grid_size-100; i++){
+		for(var j=100;j&lt;grid_size-100;j++){
+			var randNumber = Math.round(Math.random() * rate); 
+			if(randNumber == rate){
+				grid[i][j] = 1;
+			}else{
+				grid[i][j] = 0;
+			}
+			
+		}
+	}
+}
+						
+					</pre>
+
+					<p>
+						Update is also simple.
+						The update function loop through this 2d array and check the surroundings of indexes by adding the values around it.
+						And then apply rules to it.
+					</p>
+					<pre>
+function updateGrid(){
+	for(i=1;i&lt;grid_size-1;i++){
+		for(j=1;j&lt;grid_size-1;j++){
+			var cell_count = 0;
+			cell_count += grid[i-1][j-1];
+			cell_count += grid[i-1][j];
+			cell_count += grid[i-1][j+1];
+			cell_count += grid[i][j-1];
+			cell_count += grid[i][j+1];
+			cell_count += grid[i+1][j-1];
+			cell_count += grid[i+1][j];
+			cell_count += grid[i+1][j+1];
+
+			if(grid[i][j]==0){
+				if(cell_count==3){
+					mirrorGrid[i][j] = 1;
+				}else{
+					mirrorGrid[i][j] = 0;
+				}
+			}else if(grid[i][j]==1){
+				if(cell_count==2 || cell_count==3){
+					mirrorGrid[i][j]=1;
+				}else{
+					mirrorGrid[i][j]=0;
+				}
+			}
+		}
+	}
+
+	var temp = grid;
+	grid = mirrorGrid;
+	mirrorGrid = temp;
+}
+					</pre>
+					<p>
+						The mirrorGrid is a temporary place holder which holds new generated grid to be presented. In the end of the function, 
+						apply that information to the original grid.
+					</p>
+				</div>
+
+				<div class="content_section">
+					<h3>Drawing Grid</h3>
+					<p>
+						Finally, we need to draw the grid into the website. 
+						First, we put a canvas in html code which will be the place to draw on.
+						Then use Javascript to get that canvas from documentation. 
+						Use Canvas.clearRect() function to clear out the old grid to avoid blending different grids together.
+						The interate through the updated grid again, while updating the canvas using canvas.fillRect() function to draw small rectangles on it.
+					</p>
+					<pre>
+function drawGrid() { // draw the grid on canvas on website
+	var ctx = canv.getContext(&quot;2d&quot;);
+	ctx.clearRect(0, 0, 400, 400);
+	for(var i=0; i&lt;grid_size;i++){
+		for(var j=0;j&lt;grid_size;j++){
+			if(grid[i][j] == 1){
+				ctx.fillStyle = &quot;#000000&quot;;
+				ctx.fillRect(i, j, 1, 1);
+			}
+		}
+	}
+}
+					</pre>
+				</div>
+
+				<div class="content_section">
+					<h3>
+						Animation Loop
+					</h3>
+					<p>
+						To make the website to render animation smoothly. Try to use requestAnimationFrame() function:
+					</p>
+					<pre>
+function loop(){
+	drawGrid();
+	updateGrid();
+	requestAnimationFrame(loop);
+}
+					</pre>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
